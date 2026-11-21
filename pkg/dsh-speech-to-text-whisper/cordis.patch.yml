@@ -1,0 +1,21 @@
+# Bundle do provider Whisper local (sherpa-onnx) para ditado em portugues do Brasil.
+#
+# Registrado como bundle (e nao como insert no patch do perfil) porque o loader
+# resolve o `name` relativo ao diretorio do patch que declara a entrada. Como
+# bundle, a resolucao parte do diretorio do proprio pacote e encontra tanto este
+# modulo quanto suas dependencias.
+- insert:
+    - id: speech-to-text-whisper
+      name: 'dsh-speech-to-text-whisper'
+      config:
+        providerId: whisper-local
+        dataRoot: !!js dshHomePath('speech-to-text', 'whisper')
+        model: turbo
+        threads: 8
+# O Whisper passa a ser o reconhecedor padrao.
+- id: speech-to-text
+  config:
+    defaultProvider: whisper-local
+# O SenseVoice embutido nao cobre portugues e, nesta build, o worker dele nao sobe.
+- id: speech-to-text-sensevoice
+  disabled: true

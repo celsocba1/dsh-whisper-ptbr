@@ -1,0 +1,44 @@
+{
+  "models": {
+    "turbo": {
+      "encoder": {
+        "name": "turbo-encoder.int8.onnx",
+        "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-turbo/resolve/main/turbo-encoder.int8.onnx",
+        "bytes": 674716297,
+        "sha256": "b02dcdf54f348741e93fe732b67d933c8dcb6735655f710640143081db38878b"
+      },
+      "decoder": {
+        "name": "turbo-decoder.int8.onnx",
+        "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-turbo/resolve/main/turbo-decoder.int8.onnx",
+        "bytes": 361080764,
+        "sha256": "20accd02388482eb3a46bd615631adfdc85e1eb2c7db9ea3f02a40ffe6b81547"
+      }
+    },
+    "large-v3": {
+      "encoder": {
+        "name": "large-v3-encoder.int8.onnx",
+        "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-large-v3/resolve/main/large-v3-encoder.int8.onnx",
+        "bytes": 766671985,
+        "sha256": "d531cf17248acc43e8c09b472a0877055e770877857a5332fc1304b36534ec85"
+      },
+      "decoder": {
+        "name": "large-v3-decoder.int8.onnx",
+        "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-large-v3/resolve/main/large-v3-decoder.int8.onnx",
+        "bytes": 1008265203,
+        "sha256": "ebc6bfd88e162a46cb3edee8a7e727e1dcbc65cabecb19e2573695e4d495e1af"
+      }
+    }
+  },
+  "tokens": {
+    "name": "whisper-tokens.txt",
+    "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-turbo/resolve/main/turbo-tokens.txt",
+    "bytes": 816730,
+    "sha256": "b34b360dbb493e781e479794586d661700670d65564001f23024971d1f2fa126"
+  },
+  "vad": {
+    "name": "silero_vad.onnx",
+    "url": "https://huggingface.co/csukuangfj/vad/resolve/fba88cd2e921609e7675c3aaf51e0b9b295da4bc/silero_vad.onnx",
+    "bytes": 1807522,
+    "sha256": "a35ebf52fd3ce5f1469b2a36158dba761bc47b973ea3382b3186ca15b1f5af28"
+  }
+}
