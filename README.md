@@ -1,16 +1,10 @@
 # dsh-speech-to-text-whisper — local Whisper (pt-BR) provider for DeepSeek Harness
 
-Drop-in **speech-to-text provider for the DeepSeek Harness (`dsh`)** that replaces the built-in SenseVoice recognizer (which does not cover Portuguese) with **local Whisper large-v3-turbo via sherpa-onnx** — dictation in Brazilian Portuguese (and 15+ other languages), **100% offline**, with sha256-verified model assets.
+Drop-in **speech-to-text provider for the DeepSeek Harness (`dsh`)** that replaces the built-in SenseVoice recognizer (which does not cover Portuguese) with **local Whisper large-v3-turbo via sherpa-onnx** — dictation in Brazilian Portuguese (and 15+ other languages), running entirely offline, with sha256-verified model assets.
 
-The provider package (`pkg/dsh-speech-to-text-whisper`) is a fork of the official `@deepseek-ai` SenseVoice provider (MIT), adapted for Whisper: Portuguese language list, VAD-tuned decode, and deterministic custom-term correction.
+The provider package (`pkg/dsh-speech-to-text-whisper`) is a fork of the official `@deepseek-ai` SenseVoice provider (MIT), adapted for Whisper: Portuguese language list, VAD-tuned decode, and deterministic custom-term correction. The CPU default threads: 8 — this one runs on CPU, no GPU needed.
 
 > Em português: veja [Como funciona em pt-BR](#como-funciona-em-pt-br) no fim do README. Os comentários do código estão em pt-BR.
-
-## What you get
-
-- The recognizer shows up in the dsh web UI as **"Whisper turbo (sherpa-onnx)"** and becomes the default.
-- Models are pinned (`runtime/assets.json`: revision, size, sha256) and can be pre-seeded locally or downloaded on first use from Hugging Face (or HF-Mirror).
-- Runs CPU-side (`threads: 8` default), no GPU required.
 
 ## Install
 
@@ -29,7 +23,7 @@ DSH_WHISPER_MODELS_DIR=/path/with/models/whisper-onnx+silero bash install.sh
 
 Otherwise the provider downloads the assets on first use (pinned sha256, from `https://huggingface.co` with HF-Mirror fallback).
 
-Then **restart the dsh web server** and hard-reload the browser (Ctrl+Shift+R).
+Then **restart the dsh web server** and hard-reload the browser (Ctrl+Shift+R). The recognizer shows up as **"Whisper turbo (sherpa-onnx)"** and becomes the default.
 
 ### The mandatory symlink
 
@@ -57,6 +51,14 @@ Checks: package installed and importable, registry block present in the profile 
 `providerId`, `model` (`turbo` | `large-v3`), `threads`, `segmentSeconds` (max 29), `minDecodeSeconds`, VAD thresholds, timeouts — see the `Config` schema in `pkg/dsh-speech-to-text-whisper/lib/worker.js` and the provider README inside the package.
 
 **Custom-term corrections**: `lib/worker.js` has a `CORRECOES_NOMES` list (regex → replacement, whole word). Put *your* proper names and jargon there — it's the same idea as a user dictionary.
+
+## Tests
+
+Structure tests with plain Node (no dependencies, no model download):
+
+```bash
+node --test tests/    # 12 tests: pinned assets, registry block, custom-term list, repo hygiene
+```
 
 ## Building the package (maintainers)
 
